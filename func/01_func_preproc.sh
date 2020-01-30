@@ -55,20 +55,24 @@ clean_bool=True
 anat_reg_dir_name=reg
 func_reg_dir_name=func_reg
 anat_reg_refine=false
+bash ${local_scripts_dir}/H1/ccs_02_anatregister.sh ${subject} ${analysisdirectory} ${anat_dir_name} # Something went wrong with directory names :/
 bash ${local_scripts_dir}/H1/ccs_02_funcbbregister.sh ${subject} ${analysisdirectory} ${func_dir_name} ${rest_name} \
 ${anat_dir_name} ${fsaverage} ${use_epi0} ${redo_reg} 
-bash ${local_scripts_dir}/H1/ccs_02_funcregister.sh ${subject} ${analysisdirectory} ${func_dir_name} ${rest_name} \
-${anat_dir_name} ${fsaverage} ${use_epi0} ${redo_reg}
-bash ${local_scripts_dir}/H1/ccs_02_funccheck_bbregister.sh ${subject} ${analysisdirectory} ${func_dir_name} ${rest_name} \ 
+bash ${local_scripts_dir}/H1/ccs_02_funcregister.sh ${subject} ${analysisdirectory} ${anat_dir_name} ${func_dir_name} \
+${standard_head} ${anat_reg_refine} ${reg_dir_name}
+
+# Check registrations: 
+bash ${local_scripts_dir}/H1/ccs_02_funccheck_bbregister.sh ${analysisdirectory} ${subject_list} ${func_dir_name} ${rest_name} \ 
 ${use_epi0} ${fsaverage}
-bash ${local_scripts_dir}/H1/ccs_02_funccheck_fnirt.sh ${analysisdirectory} ${subject} ${func_dir_name} ${standard_brain}
+bash ${local_scripts_dir}/H1/ccs_02_funccheck_fnirt.sh ${analysisdirectory} ${subject_list} ${func_dir_name} ${standard_brain}
 
+# Get WM/CSF/GM/
+bash ${local_scripts_dir}/H1/ccs_03_funcsegment.sh ${subject} ${analysisdirectory} ${rest_name} ${anat_dir_name} ${func_dir_name}
 
-#bash ${local_scripts_dir}/ccs_03_xt_funcsegment.sh ${subject} ${analysisdirectory} ${rest_name} ${anat_dir_name} ${func_dir_name} ${func_reg_dir_name}
+# Regress out nuisance parameters:
+bash ${local_scripts_dir}/H1/ccs_04_funcnuisance.sh ${subject} ${analysisdirectory} ${rest_name} ${func_dir_name} ${func_reg_dir_name} ${svd}
 
-#bash ${local_scripts_dir}/ccs_04_xt_funcnuisance.sh ${subject} ${analysisdirectory} ${rest_name} ${func_dir_name} ${func_reg_dir_name} ${svd}
-
-#bash ${scripts_dir}/ccs_05_xt_funcpreproc_final.sh ${subject} ${analysisdirectory} ${rest_name} ${anat_dir_name} ${func_dir_name} ${done_refine_anatreg} ${standard_template} ${fsaverage} ${hp} ${lp} ${anat_reg_dir_name} ${func_reg_dir_name}
-
-bash ${local_scripts_dir}/ccs_05_xt_funcpreproc_final_nofilt.sh ${subject} ${analysisdirectory} ${rest_name} ${anat_dir_name} ${func_dir_name} ${done_refine_anatreg} ${standard_template} ${fsaverage} ${anat_reg_dir_name} ${func_reg_dir_name}
+# Bandpass, smoothing
+bash ${local_scripts_dir}/H1/ccs_05_funcpreproc_cortex.sh ${subject} ${analysisdirectory} ${rest} ${anat_dir_name} ${func_dir_name} ${fsaverage}
+bash ${local_scripts_dir}/H1/ccs_05_funcpreproc_nofilt_cortex.sh ${subject} ${analysisdirectory} ${rest_name} ${anat_dir_name} ${func_dir_name} ${done_refine_anatreg} ${standard_template} ${fsaverage} ${anat_reg_dir_name} ${func_reg_dir_name}
 
