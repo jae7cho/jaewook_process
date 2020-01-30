@@ -41,4 +41,4 @@ bash ${CCSDIR}/H1/ccs_02_anatregister.sh ${subject} ${dir} ${anat_dir_name}
 
 ## Quality assurances of spatial normalization
 reg_refine=false
-bash ${CCSDIR}/H1/ccs_02_anatcheck_fnirt.sh ${dir} ${subject_list} ${anat_dir_name} ${standard_brain} ${reg_refine}
+bash ${CCSDIR}/H1/ccs_02_anatcheck_fnirt.sh ${dir} ${subjects_list} ${anat_dir_name} ${standard_brain} ${reg_refine}
