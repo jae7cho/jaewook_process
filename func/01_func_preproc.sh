@@ -73,6 +73,5 @@ bash ${local_scripts_dir}/H1/ccs_03_funcsegment.sh ${subject} ${analysisdirector
 bash ${local_scripts_dir}/H1/ccs_04_funcnuisance.sh ${subject} ${analysisdirectory} ${rest_name} ${func_dir_name} ${func_reg_dir_name} ${svd}
 
 # Bandpass, smoothing
-bash ${local_scripts_dir}/H1/ccs_05_funcpreproc_cortex.sh ${subject} ${analysisdirectory} ${rest_name} ${anat_dir_name} ${func_dir_name} ${fsaverage}
-bash ${local_scripts_dir}/H1/ccs_05_funcpreproc_nofilt_cortex.sh ${subject} ${analysisdirectory} ${rest_name} ${anat_dir_name} ${func_dir_name} ${done_refine_anatreg} ${standard_template} ${fsaverage} ${anat_reg_dir_name} ${func_reg_dir_name}
-
+bash ${scripts_dir}/H1/ccs_05_funcpreproc_cortex.sh ${subject} ${analysisdirectory} ${rest} ${anat_dir_name} ${func_dir_name} ${fsaverage}
+bash ${scripts_dir}/H1/ccs_05_funcpreproc_nofilt_cortex.sh ${subject} ${analysisdirectory} ${rest} ${anat_dir_name} ${func_dir_name} ${fsaverage}
