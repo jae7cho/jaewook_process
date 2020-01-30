@@ -45,8 +45,7 @@ lp=0.1
 ## SUBJECT LOOP
 ## Preprocessing functional images
 numDropping=5
-bash ${local_scripts_dir}/H1/ccs_01_funcpreproc.sh ${subject} ${analysisdirectory} ${rest_name} \
-${numDropping} ${TR} ${anat_dir_name} ${func_dir_name} ${tpattern}
+bash ${local_scripts_dir}/H1/ccs_01_funcpreproc.sh ${subject} ${analysisdirectory} ${rest_name} ${numDropping} ${TR} ${anat_dir_name} ${func_dir_name} ${tpattern}
 
 use_epi0=false
 anat_reg_refine=false
