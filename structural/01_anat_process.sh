@@ -1,4 +1,4 @@
-
+#!/bin/bash
 ## subject
 subject=jaewook
 ## analysisdirectory
